@@ -8,10 +8,22 @@
         <ScrollView>
             <StackLayout>
                 <Image x:Name="image" Aspect="AspectFit"/>
-                <Label x:Name="author"/>
-                <Label x:Name="total_collections"/>
-                <Label x:Name="total_likes"/>
-                <Label x:Name="total_photos"/>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Author: "/>
+                    <Label x:Name="author"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Total collections: "/>
+                    <Label x:Name="total_collections"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Total likes: "/>
+                    <Label x:Name="total_likes"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Total photos: "/>
+                    <Label x:Name="total_photos"/>
+                </StackLayout>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
