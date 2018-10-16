@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ServerApp
 {
-    class Model
+    public class Model
     {       
         public string Created { get; set; }
         public string IdPhoto { get; set; }

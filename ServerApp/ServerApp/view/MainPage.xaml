@@ -12,13 +12,12 @@
 
         <ListView x:Name="listView"
                   HasUnevenRows="True"
-                  ItemsSource="{Binding List}"
-                  ItemTapped="OnTapped"
+                  ItemsSource="{Binding List}"                 
                   ItemSelected="OnSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Image Source="{Binding Regular}" Aspect="AspectFill"/>
+                        <Image Source="{Binding PhotosUrl.Regular}" Aspect="AspectFill"/>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>

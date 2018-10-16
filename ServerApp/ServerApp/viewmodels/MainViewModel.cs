@@ -16,7 +16,7 @@ namespace ServerApp
     {
         public bool IsRunning { get; set; }
         public bool IsVisible { get; set; }
-        public ObservableCollection<PhotosUrl> List { get; set; }
+        public ObservableCollection<Model> List { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         public ICommand LoadDataCommand { protected set; get; }
 
@@ -25,7 +25,7 @@ namespace ServerApp
             //this.LoadDataCommand = new Command(LoadData);
             IsVisible = true;
             IsRunning = true;
-            List = new ObservableCollection<PhotosUrl>();
+            List = new ObservableCollection<Model>();
             LoadData();
             IsRunning = false;
             IsVisible = false;
@@ -49,8 +49,9 @@ namespace ServerApp
                     var o = JObject.Parse(a[i].ToString());
                     var str = o.SelectToken(@"$.urls");
                     var photosUrl = JsonConvert.DeserializeObject<PhotosUrl>(str.ToString());
-
-                    List.Add(photosUrl);
+                    Model model = new Model();
+                    model.PhotosUrl = photosUrl;
+                    List.Add(model);
                 }
                 
             }

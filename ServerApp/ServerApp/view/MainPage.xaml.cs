@@ -1,5 +1,6 @@
 ﻿using Plugin.Connectivity;
 using Plugin.Connectivity.Abstractions;
+using ServerApp.view;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,16 +16,15 @@ namespace ServerApp
         {
             InitializeComponent();           
             this.BindingContext = new MainViewModel();          
-        }
-
-        private async void OnTapped(Object sender, ItemTappedEventArgs e) { }   
+        }      
         
         private async void OnSelected(Object sender, SelectedItemChangedEventArgs args)
         {
-            PhotosUrl o = args.SelectedItem as PhotosUrl;
-            if (o != null)
+            Model model = args.SelectedItem as Model;
+           
+            if (model != null)
             {
-               await Navigation.PushAsync(new DetailPage(o));
+               await Navigation.PushAsync(new DetailPage(model));
             }
         }
     }

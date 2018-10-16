@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-namespace ServerApp
+
+namespace ServerApp.view
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class DetailPage : ContentPage
 	{
-		public DetailPage (PhotosUrl o)
+		public DetailPage (Model model)
 		{
 			InitializeComponent ();
-            image.Source = o.Regular;
+            image.Source = model.PhotosUrl.Regular;
         }
 	}
 }
