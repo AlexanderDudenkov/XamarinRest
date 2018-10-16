@@ -12,17 +12,14 @@ using Xamarin.Forms;
 
 namespace ServerApp
 {
-    class MainViewModel : INotifyPropertyChanged
+    class MainPageViewModel 
     {
         public bool IsRunning { get; set; }
         public bool IsVisible { get; set; }
-        public ObservableCollection<Model> List { get; set; }
-        public event PropertyChangedEventHandler PropertyChanged;
-        public ICommand LoadDataCommand { protected set; get; }
+        public ObservableCollection<Model> List { get; set; }            
 
-        public MainViewModel()
-        {
-            //this.LoadDataCommand = new Command(LoadData);
+        public MainPageViewModel()
+        { 
             IsVisible = true;
             IsRunning = true;
             List = new ObservableCollection<Model>();
@@ -36,7 +33,7 @@ namespace ServerApp
             try
             {
                 HttpClient client = new HttpClient();
-               
+
                 client.BaseAddress = new Uri(Constants.getInstance().url);
                 var response = await client.GetAsync(client.BaseAddress);
                 response.EnsureSuccessStatusCode();
@@ -46,20 +43,35 @@ namespace ServerApp
 
                 for (int i = 0; i < a.Count; i++)
                 {
-                    var o = JObject.Parse(a[i].ToString());
-                    var str = o.SelectToken(@"$.urls");
-                    var photosUrl = JsonConvert.DeserializeObject<PhotosUrl>(str.ToString());
                     Model model = new Model();
-                    model.PhotosUrl = photosUrl;
+                    var o = JObject.Parse(a[i].ToString());
+
+                    model = CreatePhotosUrl(o, model);
+                    model = CreateUser(o, model);
+
                     List.Add(model);
                 }
-                
+
             }
             catch (Exception ex)
             { System.Console.WriteLine($"DEBUG {ex.Message}"); }
         }
 
+        private Model CreatePhotosUrl(JObject o, Model model)
+        {
+            var str = o.SelectToken(@"$.urls");
+            var photosUrl = JsonConvert.DeserializeObject<PhotosUrl>(str.ToString());
+            model.PhotosUrl = photosUrl;
+            return model;
+        }
 
+        private Model CreateUser(JObject o, Model model)
+        {
+            var str = o.SelectToken(@"$.user");
+            var user = JsonConvert.DeserializeObject<User>(str.ToString());
+            model.User = user;
+            return model;
+        }
     }
 
 

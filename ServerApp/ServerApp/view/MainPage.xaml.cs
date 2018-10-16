@@ -11,20 +11,21 @@ using Xamarin.Forms;
 namespace ServerApp
 {
     public partial class MainPage : ContentPage
-    {    
+    {
         public MainPage()
         {
-            InitializeComponent();           
-            this.BindingContext = new MainViewModel();          
-        }      
-        
+            InitializeComponent();
+            this.BindingContext = new MainPageViewModel();
+        }
+
         private async void OnSelected(Object sender, SelectedItemChangedEventArgs args)
         {
             Model model = args.SelectedItem as Model;
-           
+
             if (model != null)
             {
-               await Navigation.PushAsync(new DetailPage(model));
+                await Navigation.PushAsync(new DetailPage(model));
+                ((ListView)sender).SelectedItem = null;
             }
         }
     }

@@ -16,6 +16,10 @@ namespace ServerApp.view
 		{
 			InitializeComponent ();
             image.Source = model.PhotosUrl.Regular;
+            author.Text = model.User.Name;
+            total_collections.Text = model.User.Total_collections.ToString();
+            total_likes.Text = model.User.Total_likes.ToString();
+            total_photos.Text = model.User.Total_photos.ToString();
         }
 	}
 }
